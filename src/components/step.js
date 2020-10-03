@@ -1,14 +1,17 @@
 import React from "react";
+import Button from "../stories/Button";
 
-const Step = ({ stepNumber, stepBoard, onStepClick }) => {
+const Step = ({ stepNumber, onStepClick }) => {
   return (
-    <button
-      type="button"
+    <Button
+      backgroundColor="#9d65c9"
+      label={`Go to Step #${stepNumber + 1}`}
       onClick={() => {
         onStepClick(stepNumber);
-      }}>
-      Step{stepNumber + 1}
-    </button>
+      }}
+      primary={false}
+      size="small"
+    />
   );
 };
 

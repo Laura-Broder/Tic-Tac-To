@@ -1,11 +1,9 @@
 import React from "react";
+import Button from "../stories/Button";
 import Step from "./step";
 
 const History = ({ newHistory, onStepClick, onResetClick }) => {
-  // const [history, setHistory] = useState([]);
-
   const renderSteps = () => {
-    // console.log(history);
     return newHistory.map((item, index) => (
       <Step
         key={index}
@@ -16,11 +14,15 @@ const History = ({ newHistory, onStepClick, onResetClick }) => {
     ));
   };
   return (
-    <div>
-      <button type="button" onClick={onResetClick}>
-        Restart Game
-      </button>
-      {renderSteps()}
+    <div className="history">
+      <Button
+        backgroundColor="rgba(215,137,215,1)"
+        label="Restart Game"
+        onClick={onResetClick}
+        primary
+        size="large"
+      />
+      <div className="history-steps">{renderSteps()}</div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Cell from "./Cell";
 
 const style = {
@@ -9,16 +9,7 @@ const style = {
   padding: "5px",
 };
 
-const GameBoard = ({ nextPlayer, onChange, currentBoard }) => {
-  const [nextPlayerContent, setNextPlayerContent] = useState(nextPlayer);
-
-  const handleClick = (row, col) => {
-    currentBoard[row][col] = nextPlayerContent;
-    let newNextPlayer = nextPlayerContent === "X" ? "0" : "X";
-    setNextPlayerContent(newNextPlayer);
-    onChange(newNextPlayer, currentBoard);
-  };
-
+const GameBoard = ({ onChange, currentBoard }) => {
   const createMatrix = (rows, cols) => {
     let ElementsMatrix = [];
     for (let i = 0; i < rows; i++) {
@@ -28,17 +19,15 @@ const GameBoard = ({ nextPlayer, onChange, currentBoard }) => {
           <Cell
             content={currentBoard[i][j]}
             key={(i, j)}
-            nextPlayer={nextPlayerContent}
             row={i}
             col={j}
-            handleClick={handleClick}
+            handleClick={onChange}
           />
         );
       }
     }
     return ElementsMatrix;
   };
-
   const renderBoard = () => {
     if (currentBoard.length) {
       const rows = currentBoard.length;
@@ -47,6 +36,10 @@ const GameBoard = ({ nextPlayer, onChange, currentBoard }) => {
     } else return <h1>Loading...</h1>;
   };
 
-  return <div style={style}>{renderBoard()}</div>;
+  return (
+    <div className="container" style={style}>
+      {renderBoard()}
+    </div>
+  );
 };
 export default GameBoard;

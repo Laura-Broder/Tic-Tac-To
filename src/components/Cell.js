@@ -1,22 +1,30 @@
 import React, { useState } from "react";
 
-let style = {
-  height: "100px",
-  width: "100px",
-  border: "1px solid black",
-};
-
-const Cell = ({ row, col, handleClick, nextPlayer, content }) => {
+const Cell = ({ row, col, handleClick, content }) => {
+  const [blink, setBlink] = useState("");
   const onClick = () => {
     if (content === "") {
       handleClick(row, col);
     } else {
-      console.log("Cell is marked");
+      setBlink("blink");
+      setTimeout(() => {
+        setBlink("");
+      }, 500);
+    }
+  };
+  const renderContent = () => {
+    switch (content) {
+      case "X":
+        return <i className="fas fa-times"></i>;
+      case "0":
+        return <i className="far fa-circle"></i>;
+      default:
+        return;
     }
   };
   return (
-    <div style={style} onClick={onClick}>
-      {content}
+    <div className={`cell ${blink}`} onClick={onClick}>
+      {renderContent()}
     </div>
   );
 };
